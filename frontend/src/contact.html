@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url("https://www.shutterstock.com/image-photo/colour-old-concrete-wall-texture-600nw-2600440143.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    padding-top: 120px; /* keeps content below fixed nav */
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 95%;  /* ✅ FIXED */
+    height: 95px;
+    background: rgba(68, 38, 32, 0.95);
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+}
+
+nav h1 {
+    margin: 0;
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;  /* ✅ spacing reduced, ONLY change done */
+}
+
+nav a {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    transition: 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 1px;
+}
+
+nav a:hover {
+    color: wheat;
+}
+
+nav i {
+    font-size: 22px;
+}
+
+h2 {
+    margin-top: 40px;
+    color: black;
+    font-size: 28px;
+}
+
+main {
+    margin-top: 40px; /* ✅ FIXED: pushes matter down so it doesn't mix */
+    text-align: center;
+}
+
+form {
+  width: 500px;
+  margin: 30px auto;
+  padding: 40px;
+  border: 3px solid black;
+  border-radius: 30px;
+  background-color: rgba(47, 4, 4, 0.71);
+  color: white;
+}
+
+label {
+  display: block;
+  margin: 10px 0 5px 0;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-size: 15px;
+}
+
+input[type="submit"] {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+input[type="submit"]:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+}
+</style>
+
+<body>
+
+<nav>
+   <h1>PRP Village Foods</h1>
+   <div class="nav-links">
+
+   <a href="#home"><i class="fas fa-home"></i> Home</a>
+<a href="product.html"><i class="fas fa-info-circle"></i> Product</a>
+<a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
+<a href="farmer_login.html"><i class="fas fa-user"></i> Farmer Login</a>
+<a href="home.html"><i class="fas fa-shopping-cart"></i> Shop</a>
+
+
+   </div>
+
+   </div>
+</nav>
+
+<main>
+    <p style="font-size:24px; color:black; font-weight:bold;" align="center">
+        Have any questions? We’d love to hear from you!<br>
+        or feel free to reach out at <b>123-456-7890</b>.
+    </p>
+</main>
+
+<h2 align="center">Feedback Form</h2>
+
+<form action="#" method="post">
+    <label>Name:</label>
+    <input type="text" name="name" id="sname" required>
+
+    <label>Email-Id:</label>
+    <input type="email" name="email" id="emailid" required>
+
+    <label>Mobile No:</label>
+    <input type="tel" name="mobile" id="phno" required>
+
+    <label>Your Feedback:</label>
+    <textarea name="feedback" id="feedback" rows="5" required></textarea>
+
+    <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>
