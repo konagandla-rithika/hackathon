@@ -3,138 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop - PRP Village Foods</title>
+    <title>Shop - Cart</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f4f2ef;
-}
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-image: url(https://www.shutterstock.com/image-photo/colour-old-concrete-wall-texture-600nw-2600440143.jpg);
+    }
 
-/* Navbar */
-nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 75px;
-    background: rgba(68,38,32,0.95);
-    padding: 0 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    z-index: 1000;
-}
+    nav {
+        background: #4a2c24;
+        padding: 20px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+    }
 
-.nav-left {
-    color: white;
-    font-size: 26px;
-    font-weight: bold;
-}
+    nav a {
+        color: white;
+        text-decoration: none;
+        margin-left: 20px;
+        font-size: 20px;
+    }
 
-.nav-right {
-    display: flex;
-    gap: 35px;
-}
+    h1 {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 36px;
+    }
 
-.nav-right a {
-    color: white;
-    font-size: 18px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
+    .cart-container {
+        width: 90%;
+        margin: auto;
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
 
-.nav-right a:hover {
-    opacity: 0.8;
-}
+    .cart-item {
+        background: white;
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        gap: 20px;
+    }
 
-/* Cart Section */
-.cart-container {
-    margin-top: 120px;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-}
-.cart-header {
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-.cart-item {
-    background: white;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 0 8px rgba(0,0,0,0.2);
-    margin-bottom: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.cart-item h4 {
-     margin: 0;
-     font-size: 18px;
-}
-.total {
-     font-size: 22px;
-     font-weight: bold;
-     margin-top: 20px;
-}
+    .cart-item img {
+        width: 140px;
+        height: 140px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    .cart-item button {
+        background: #7a1f06;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-left: auto;
+    }
+
+    .cart-item button:hover {
+        background: #a1290c;
+    }
+
+    .total-box {
+        width: 90%;
+        margin: auto;
+        margin-top: 20px;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        font-size: 24px;
+        font-weight: bold;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .action-btn {
+        display: block;
+        margin: 20px auto;
+        padding: 12px 25px;
+        background: #7a1f06;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    .action-btn:hover {
+        background: #a1290c;
+    }
 </style>
-
 </head>
+
 <body>
 
 <nav>
-    <div class="nav-left">PRP Village Foods</div>
-    <div class="nav-right">
-        <a href="home.html"><i class="fas fa-shopping-bag"></i> Shop</a>
-        <a href="product.html"><i class="fas fa-box"></i> Products</a>
+    <h2>PRP Village Foods</h2>
+    <div>
+        <a href="home.html"><i class="fas fa-home"></i> Home</a>
+        <a href="product.html"><i class="fas fa-info-circle"></i> Product</a>
         <a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
         <a href="farmer_login.html"><i class="fas fa-user"></i> Farmer Login</a>
+        <a href="shop.html"><i class="fas fa-shopping-cart"></i> Shop</a>
     </div>
 </nav>
 
-<div class="cart-container">
-    <div class="cart-header">Shopping Cart 🛒</div>
+<h1>Your Cart</h1>
 
-    <div id="cart-items"></div>
+<div class="cart-container" id="cartItems"></div>
 
-    <div class="total">Total: ₹<span id="total-cost">0</span></div>
-</div>
+<div class="total-box" id="totalAmount">Total: ₹0</div>
+
+<button class="action-btn" onclick="clearCart()">Clear Cart</button>
+<button class="action-btn" onclick="placeOrder()">Place Order</button>
 
 <script>
-// Demo cart data (you can remove later when backend is connected)
-let cart = [
-    {name: "Rice Flour", cost: 150},
-    {name: "Chilli Powder", cost: 250}
-];
+    const productImages = {
+        "Rice flour": "https://th.bing.com/th/id/OIP.-6W9sGg6KL92UVUkmd3ZgAHaGW?w=224&h=192&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+        "Chilli powder": "https://www.pentastar.in/wp-content/uploads/2024/02/red-chilli-powder-min-1620x1080.jpg",
+        "Turmeric": "https://img.emedihealth.com/wp-content/uploads/2020/10/turmeric-feat-1.jpg",
+        "Wheat flour": "https://th.bing.com/th/id/OIP.9xxx61ly5Lf3jVDrXEGhxwHaEj?w=294&h=181&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+        "Corn flour": "https://th.bing.com/th/id/OIP.Xa-aAl3CknBDmhL7iJYcbwHaE8?w=235&h=180&c=7&r=0&o=7&dpr=1.7&rm=3",
+        "Dry fruits laddu": "https://nmfoodsofficial.com/wp-content/uploads/2024/08/nm-foods-dry-fruit-laddu-min-1.jpg",
+        "Mixture": "https://tiimg.tistatic.com/fp/1/007/812/a-grade-crispy-spicy-yellow-mixture-namkeen-snack-318.jpg",
+        "Jilebi": "https://vellankifoods.com/cdn/shop/files/bellam_jilebi1_2048x.jpg?v=1690537379",
+        "Nuvvu pappu karapodi": "https://chittipickles.in/cdn/shop/files/nuvvula_til_karam_380x446.webp?v=1750130789",
+        "Sunnundalu": "https://chittipickles.in/cdn/shop/files/ChatGPTImageAug8_2025_11_53_20AM_52b10f44-cb09-4733-9f31-1273b8706aa7_380x446.png?v=1754634332",
+        "Murukullu": "https://tse3.mm.bing.net/th/id/OIP.0XPRF9ztEgHoOgo9h2OvsQHaGi?rs=1&pid=ImgDetMain&o=7&rm=3"
+    };
 
-function displayCart() {
-    const cartDiv = document.getElementById("cart-items");
-    let total = 0;
-    cartDiv.innerHTML = "";
+    function loadCart() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let container = document.getElementById("cartItems");
+        container.innerHTML = "";
 
-    cart.forEach((item, index) => {
-        total += item.cost;
-        cartDiv.innerHTML += `
-            <div class="cart-item">
-                <h4>${item.name} - ₹${item.cost}</h4>
-                <i class="fas fa-trash" onclick="removeItem(${index})" style="cursor:pointer"></i>
-            </div>`;
-    });
+        if (cart.length === 0) {
+            container.innerHTML = "<h2 style='text-align:center;'>Cart is empty</h2>";
+            document.getElementById("totalAmount").innerText = "Total: ₹0";
+            return;
+        }
 
-    document.getElementById("total-cost").textContent = total;
-}
+        let total = 0;
 
-function removeItem(i) {
-    cart.splice(i, 1);
-    displayCart();
-}
+        cart.forEach((item, index) => {
+            total += item.price;
 
-displayCart();
+            container.innerHTML += `
+                <div class="cart-item">
+                    <img src="${productImages[item.name]}">
+                    <div>
+                        <h2>${item.name}</h2>
+                        <p>Price: ₹${item.price}</p>
+                    </div>
+                    <button onclick="removeItem(${index})">Remove</button>
+                </div>
+            `;
+        });
+
+        document.getElementById("totalAmount").innerText = "Total: ₹" + total;
+    }
+
+    function removeItem(index) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart.splice(index, 1);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        loadCart();
+    }
+
+    function clearCart() {
+        localStorage.removeItem("cart");
+        loadCart();
+    }
+
+    function placeOrder() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        if(cart.length === 0){
+            alert("Your cart is empty!");
+            return;
+        }
+
+        alert("Your order has been placed successfully! ✅");
+        clearCart();
+    }
+
+    loadCart();
 </script>
 
 </body>

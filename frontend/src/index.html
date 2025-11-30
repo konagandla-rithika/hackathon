@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Signup - PRP Village Foods</title>
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+  body {
+    margin: 0;
+    font-family: 'Poppins', Arial, sans-serif;
+    background-image: url(https://wallpaperaccess.com/full/4712754.jpg);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .box {
+    background: rgb(231, 230, 230);
+    padding: 20px 40px;
+    border-radius: 15px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    width: 500px;
+    text-align: center;
+  }
+
+  input {
+    width: 100%;
+    padding: 14px 15px;
+    margin: 10px 0;
+    border: 2px solid #4a2c24;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+
+  input.valid { border-color: green; box-shadow: 0 0 5px green; }
+  input.invalid { border-color: red; box-shadow: 0 0 5px red; }
+
+  button {
+    width: 100%;
+    padding: 14px;
+    background: #4a2c24;
+    color: white;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .login-link {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #4a2c24;
+  }
+  .login-link a {
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 5px;
+    color: #4a2c24;
+  }
+
+  .error, .success {
+    font-size: 14px;
+    margin-top: 10px;
+    min-height: 20px;
+  }
+  .error { color: #e03e3e; }
+  .success { color: #2b8a3e; }
+
+</style>
+</head>
+
+<body>
+  <div class="box">
+    <h2>Welcome to PRP Village Foods 🌾</h2>
+
+    <h3><i class="fas fa-user-plus"></i> Signup</h3>
+
+    <input type="text" placeholder="Create Username" id="signUser" />
+
+    <input type="password" placeholder="Create Password" id="signPass" />
+    <small id="passValidation" class="error"></small>
+
+    <input type="email" placeholder="Enter Email" id="signEmail" />
+    <small id="emailValidation" class="error"></small>
+
+    <input type="tel" placeholder="Enter Phone Number" id="signPhone" />
+
+    <button id="signupBtn" type="button">Signup</button>
+
+    <!-- LOGIN LINKS (Added Back) -->
+    <p class="login-link">
+      Already have an account?
+      <a href="farmer_login.html"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+    </p>
+
+    <p class="login-link">
+      Farmer account!
+      <a href="farmer.html"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+    </p>
+
+    <p class="login-link">
+      Admin account!
+      <a href="Admin.html"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+    </p>
+
+    <p class="error" id="errorMsg"></p>
+    <p class="success" id="successMsg"></p>
+  </div>
+
+  <script>
+    const emailInput = document.getElementById('signEmail');
+    const passInput = document.getElementById('signPass');
+
+    // LIVE EMAIL VALIDATION
+    emailInput.addEventListener('input', () => {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const msg = document.getElementById('emailValidation');
+
+      if (emailPattern.test(emailInput.value.trim())) {
+        emailInput.classList.add("valid");
+        emailInput.classList.remove("invalid");
+        msg.innerText = "";
+      } else {
+        emailInput.classList.add("invalid");
+        emailInput.classList.remove("valid");
+        msg.innerText = "Invalid email format ❗";
+      }
+    });
+
+    // LIVE PASSWORD VALIDATION
+    passInput.addEventListener('input', () => {
+      const msg = document.getElementById('passValidation');
+
+      if (passInput.value.length >= 8) {
+        passInput.classList.add("valid");
+        passInput.classList.remove("invalid");
+        msg.innerText = "";
+      } else {
+        passInput.classList.add("invalid");
+        passInput.classList.remove("valid");
+        msg.innerText = "Password must be at least 8 characters ❗";
+      }
+    });
+
+    // SIGNUP BUTTON VALIDATION
+    document.getElementById('signupBtn').addEventListener('click', signup);
+
+    function signup() {
+      const u = document.getElementById('signUser').value.trim();
+      const p = passInput.value.trim();
+      const email = emailInput.value.trim();
+      const phone = document.getElementById('signPhone').value.trim();
+
+      const err = document.getElementById('errorMsg');
+      const ok = document.getElementById('successMsg');
+
+      err.innerText = "";
+      ok.innerText = "";
+
+      if (!u || !p || !email || !phone) {
+        err.innerText = "Please fill all fields ❗";
+        return;
+      }
+
+      if (p.length < 8) {
+        err.innerText = "Password must be at least 8 characters ❗";
+        return;
+      }
+
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email)) {
+        err.innerText = "Enter valid email ❗";
+        return;
+      }
+
+      const phonePattern = /^[0-9]{10}$/;
+      if (!phonePattern.test(phone)) {
+        
+        return;
+      }
+
+      // Save to localStorage
+      // Send data to backend
+fetch("http://localhost:5000/signup", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ username: u, password: p, email, phone })
+})
+.then(res => res.json())
+.then(data => {
+  if (data.success) {
+    localStorage.setItem("user", u);
+    localStorage.setItem("token", data.token);
+
+    ok.innerText = "Signup successful! Redirecting...";
+
+    setTimeout(() => {
+      window.location.href = "home.html";
+    }, 1000);
+  } else {
+    err.innerText = data.message;
+  }
+})
+.catch(() => {
+  err.innerText = "Server error. Please try again.";
+});
+
+    }
+  </script>
+
+</body>
+</html>

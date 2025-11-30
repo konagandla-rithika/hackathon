@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Successful</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial;
+            background-color: #f2f2f2;
+            text-align: center;
+            padding-top: 150px;
+        }
+
+        .box {
+            background: white;
+            width: 350px;
+            margin: auto;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            color: green;
+            margin-bottom: 10px;
+        }
+
+        #msg {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 18px;
+            background: brown;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>Login Successful ✔</h2>
+    <p id="msg">Welcome Farmer!</p>
+
+    <a href="home.html">Go to Home</a>
+</div>
+
+<script>
+    // Get farmerId from URL
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("farmerId");
+
+    // If farmerId exists → show it
+    if (id && id.trim() !== "") {
+        document.getElementById("msg").innerText = "Welcome, " + id + "!";
+    } else {
+        document.getElementById("msg").innerText = "Welcome Farmer!";
+    }
+</script>
+
+</body>
+</html>

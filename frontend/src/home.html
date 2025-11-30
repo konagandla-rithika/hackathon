@@ -10,25 +10,34 @@
 <style>
     body {
         margin: 0;
-        font-family: Arial, sans-serif;
-        background-image: url(https://www.shutterstock.com/image-photo/colour-old-concrete-wall-texture-600nw-2600440143.jpg);
+        font-family: 'Poppins', Arial, sans-serif;
+        background-image: url(https://wallpaperaccess.com/full/4712754.jpg);
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
+        overflow-x: hidden;
     }
 
+    /* NAVBAR */
     nav {
         position: fixed;
         top: 0;
         width: 95%;
-        height: 95px;
-        background: rgba(68, 38, 32, 0.95);
+        height: 90px;
+        background: rgba(34, 19, 10, 0.7);
         padding: 0 40px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         z-index: 1000;
-        backdrop-filter: blur(4px);
+        backdrop-filter: blur(6px);
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+        animation: slideDown 1s ease;
+    }
+
+    @keyframes slideDown {
+        from {transform: translateY(-100%);}
+        to {transform: translateY(0);}
     }
 
     nav h1 {
@@ -36,103 +45,374 @@
         color: white;
         font-size: 32px;
         font-weight: bold;
+        letter-spacing: 1px;
     }
 
     nav div {
         display: flex;
         align-items: center;
-        gap: 28px;
+        gap: 5px;
     }
 
     nav a {
         color: white;
-        font-size: 20px;
+        font-size: 18px;
         text-decoration: none;
         cursor: pointer;
         transition: 0.3s ease;
-        display: flex;
-        align-items: center;
-        gap: 8px;
+        padding: 8px 14px;
+        border-radius: 8px;
     }
 
     nav a:hover {
-        color: wheat;
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.08);
     }
 
-    nav i {
-        font-size: 22px;
-    }
-
-    /* Transparent box style */
-    .transparent-text {
-        background-color: rgba(255, 255, 255, 0.65);
-        padding: 35px;
-        border-radius: 12px;
-        margin: 150px auto 20px auto;
+    /* HERO SECTION */
+    .hero {
+        margin-top: 130px;
+        width: 90%;
+        max-width: 1050px;
+        padding: 60px;
+        background: rgba(255,255,255,0.25);
+        backdrop-filter: blur(8px);
+        border-radius: 20px;
         text-align: center;
-        width: 80%;
-        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        animation: fadeUp 1.5s ease;
+        color: #2a130f;
     }
 
-    .section {
-        min-height: 90vh;
-        padding-top: 120px;   /* Prevent overlap with navbar */
-        text-align: center;
+    @keyframes fadeUp {
+        from {opacity: 0; transform: translateY(50px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+
+    .hero h1 {
+        font-size: 46px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #452116;
+        text-shadow: 1px 1px 2px white;
+    }
+
+    .hero p {
+        font-size: 20px;
+        color: #3c2a1f;
+        margin-bottom: 25px;
+    }
+
+    .hero button {
+        padding: 14px 30px;
+        background: #4e2d1c;
+        border: none;
+        color: white;
+        font-size: 20px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s ease;
+    }
+
+    .hero button:hover {
+        background: #ffddaa;
+        color: black;
+        transform: scale(1.1);
+    }
+
+    /* FEATURES SECTION */
+    .features {
         display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        padding-left: 40px;
-        padding-right: 40px;
+        justify-content: center;
+        gap: 35px;
+        margin-top: 70px;
+        flex-wrap: wrap;
     }
 
-    /* Fix text alignment in home page */
-    .section p {
-        max-width: 900px;
-        line-height: 1.6;
-        font-size: 18px;
+    .feature-card {
+        width: 250px;
+        background: rgba(255,255,255,0.75);
+        padding: 25px;
+        border-radius: 15px;
         text-align: center;
+        transition: 0.3s ease;
+        animation: fadeIn 2s ease;
+    }
+
+    @keyframes fadeIn {
+        from {opacity: 0;}
+        to {opacity: 1;}
+    }
+
+    .feature-card:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 0 20px rgba(255,255,255,0.7);
+    }
+
+    .feature-card i {
+        font-size: 40px;
+        color: #4e2d1c;
+        margin-bottom: 15px;
+    }
+
+    .feature-card h3 {
+        margin: 10px 0;
+    }
+
+    /* PRODUCT CARDS */
+    .product-section {
+        margin-top: 80px;
+        text-align: center;
+        color: rgb(12, 9, 9);
+        font-family: cursive;
+    }
+
+    .product-list {
+        display: flex;
+        justify-content: center;
+        gap: 35px;
+        flex-wrap: wrap;
+        margin-top: 20px;
+    }
+
+    .product-card {
+        width: 250px;
+        background: rgba(255,255,255,0.8);
+        border-radius: 15px;
+        padding: 15px;
+        transition: 0.3s ease;
+        animation: fadeIn 2s ease;
+    }
+
+    .product-card:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px rgba(255,255,255,0.8);
+    }
+
+    .product-card img {
+        width: 100%;
+        border-radius: 12px;
+    }
+
+    /* REVIEWS */
+    .review-box {
+        margin-top: 70px;
+        width: 70%;
+        background: rgba(255,255,255,0.7);
+        padding: 25px;
+        border-radius: 15px;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        animation: fadeUp 2s ease;
+        font-size: 20px;
+        font-style: italic;
+    }
+
+    .user-badge {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 14px;
+        border-radius: 50px;
+        background: rgba(255,255,255,0.15);
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    .user-circle {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #4a2c24;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+    }
+
+    .user-badge:hover {
+        background: rgba(255,255,255,0.3);
+        cursor: pointer;
     }
 </style>
 </head>
 
 <body>
 
+<!-- NAVBAR -->
 <nav>
     <h1>PRP Village Foods</h1>
     <div>
         <a href="home.html"><i class="fa-solid fa-house"></i> Home</a>
         <a href="product.html"><i class="fa-solid fa-circle-info"></i> Product</a>
-        <a href="contact.html"><i class="fa-solid fa-phone"></i> Contact</a>
-        <a href="farmer_login.html"><i class="fa-solid fa-user"></i> Farmer Login</a>
-        <a href="home.html#shop"><i class="fa-solid fa-cart-shopping"></i> Shop</a>
+        <a href="contact.html"><i class="fa-solid fa-phone"></i> Feedback</a>
+        <a href="shop.html"><i class="fa-solid fa-cart-shopping"></i> Shop</a>
+        <a id="farmerLink" href="farmer_login.html"><i class="fa-solid fa-user"></i> Farmer Login</a>
+        <a id="userIcon" class="user-badge" href="farmer_login.html">
+            <i class="fa-solid fa-user"></i> Login
+        </a>
     </div>
 </nav>
 
-<div class="transparent-text">
-    <h1>Welcome to PRP Village Foods</h1>
-    <p>Fresh food from the village to your home.</p>
+<!-- HERO AREA -->
+<div class="hero">
+    <h1>Fresh Food From Village to Your Home</h1>
+    <p>Experience the purity of traditional handcrafted village foods.</p>
+    <button onclick="window.location.href='product.html'">Explore Products</button>
 </div>
 
-<section id="home" class="section">
-    <h1>Home</h1>
-    <p>PRP Village Foods is a modern web platform dedicated to transforming traditional farming into a global opportunity. We help farmers not only sell their crops but also turn them into high-value products — from processed foods to handmade village goods. By bridging the gap between rural producers and global buyers, we bring village freshness to your doorstep.</p>
-</section>
+<!-- FEATURES -->
+<div class="features">
+    <div class="feature-card">
+        <i class="fa-solid fa-leaf"></i>
+        <h3>100% Organic</h3>
+        <p>Pure ingredients from trusted village farmers.</p>
+    </div>
 
-<section id="about" class="section">
-    <h1>About</h1>
-    <p>We connect farmers directly to customers. Our platform is more than just a marketplace — it's a movement to empower rural farmers through technology. Whether you’re a grower, a producer, or a buyer, PRP Village Foods makes it easier for you to connect, trade, and grow.</p>
-</section>
+    <div class="feature-card">
+        <i class="fa-solid fa-hand-holding-heart"></i>
+        <h3>Made With Love</h3>
+        <p>Traditional recipes passed through generations.</p>
+    </div>
 
-<section id="contact" class="section">
-    <h1>Contact</h1>
-    <p>Email: info@prpvillagefoods.com | Phone: 123-456-7890</p>
-</section>
+    <div class="feature-card">
+        <i class="fa-solid fa-store"></i>
+        <h3>Farm-to-Home</h3>
+        <p>Delivered fresh directly to your doorstep.</p>
+    </div>
+</div>
 
-<section id="profile" class="section">
-    <h1>Profile</h1>
-    <p>Manage your account and preferences here. Welcome to your PRP Village Foods profile. This is your personal space to manage your account, preferences, and activity on the platform.</p>
-</section>
+<!-- POPULAR PRODUCTS -->
+<div class="product-section">
+    <h2>Popular Products</h2>
+    <div class="product-list">
+        <div class="product-card">
+            <img src="https://blissfulbitesbytay.com/wp-content/uploads/2021/05/instant-mango-pickle-Featured-image-scaled.jpg" alt="Mango Pickle">
+            <h3>Mango Pickle</h3>
+            <p>Authentic homemade village taste.</p>
+        </div>
+
+        <div class="product-card">
+            <img src="https://cdn.shopify.com/s/files/1/0645/5951/3823/files/General_Groundnut_oil_image_blog_480x480.jpg?v=1676551940" alt="Groundnut Oil">
+            <h3>Groundnut Oil</h3>
+            <p>Pure wooden churned oil.</p>
+        </div>
+
+        <div class="product-card">
+            <img src="https://tse3.mm.bing.net/th/id/OIP.0XPRF9ztEgHoOgo9h2OvsQHaGi?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Millet Snacks">
+            <h3>Millet Snacks</h3>
+            <p>Healthy + crunchy combination.</p>
+        </div>
+    </div>
+</div>
+
+<!-- REVIEW -->
+<div class="review-box" id="reviewBox">
+    “Absolutely love the natural taste! Feels like eating homemade village food.” – Priya
+</div>
+
+<script>
+let reviews = [
+    "“Absolutely love the natural taste! Feels like homemade food.” – Priya",
+    "“Best pickles I ever tasted. Very authentic.” – Raghuram",
+    "“Pure and organic. Worth every rupee.” – Sneha"
+];
+
+let idx = 0;
+setInterval(() => {
+    idx = (idx + 1) % reviews.length;
+    document.getElementById("reviewBox").innerHTML = reviews[idx];
+}, 3000);
+</script>
+
+<script>
+function updateFarmerLink() {
+  const link = document.getElementById('farmerLink');
+  if (!link) return;
+  const username = localStorage.getItem('username');
+
+  if (username) {
+    link.innerHTML = `<i class="fa-solid fa-user"></i> ${username}`;
+    link.href = '#';
+    link.title = 'Click to logout';
+
+    link.onclick = (e) => {
+      e.preventDefault();
+      localStorage.removeItem('token');
+      localStorage.removeItem('username');
+      updateFarmerLink();
+      showUserIcon();
+    };
+  } else {
+    link.innerHTML = `<i class="fa-solid fa-user"></i> Farmer Login`;
+    link.href = 'farmer_login.html';
+    link.title = 'Farmer Login';
+    link.onclick = null;
+  }
+}
+
+function showUserIcon() {
+  const user = localStorage.getItem("user");
+  const badge = document.getElementById("userIcon");
+  if (!badge) return;
+
+  if (user) {
+    const firstLetter = user.charAt(0).toUpperCase();
+    badge.innerHTML = `<div class="user-circle">${firstLetter}</div> <span>${user}</span>`;
+    badge.href = '#';
+
+    badge.onclick = () => {
+      if (confirm("Logout?")) {
+        localStorage.clear();
+        location.reload();
+      }
+    };
+  } else {
+    badge.innerHTML = `<i class="fa-solid fa-user"></i> Login`;
+    badge.href = "farmer_login.html";
+    badge.onclick = null;
+  }
+}
+
+updateFarmerLink();
+showUserIcon();
+</script>
+
+<!-- CONTACT INFORMATION SECTION -->
+<div style="
+    margin-top: 80px;
+    width: 90%;
+    max-width: 1000px;
+    background: rgba(255,255,255,0.8);
+    padding: 30px;
+    border-radius: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    backdrop-filter: blur(5px);
+    animation: fadeUp 1.5s ease;
+">
+    <h2 style="font-size: 32px; color: #452116; margin-bottom: 20px;">
+        Contact Information
+    </h2>
+
+    <p style="font-size: 20px; color: #3c2a1f; margin: 10px 0;">
+        <i class="fa-solid fa-phone"></i> <b>Phone:</b> +91 98765 43210
+    </p>
+
+    <p style="font-size: 20px; color: #3c2a1f; margin: 10px 0;">
+        <i class="fa-solid fa-envelope"></i> <b>Email:</b> support@prpvillagefoods.com
+    </p>
+
+    <p style="font-size: 20px; color: #3c2a1f; margin: 10px 0;">
+        <i class="fa-solid fa-location-dot"></i> <b>Address:</b>  
+        PRP Village Foods, Vijayawada, Andhra Pradesh – 520001
+    </p>
+    
+</div>
 
 </body>
 </html>

@@ -1,0 +1,28 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Sample product",
+      "price": 9.99,
+      "description": "A development sample product"
+    }
+  ],
+  "messages": [],
+  "users": [
+    {
+      "id": 1,
+      "username": "farmer",
+      "password": "password"
+    }
+  ],
+  "customers": [
+    {
+      "id": 1,
+      "name": "Test Customer",
+      "email": "test@example.com",
+      "phone": "9999999999",
+      "address": "123 Village Road",
+      "createdAt": "2025-11-30T00:00:00.000Z"
+    }
+  ]
+}

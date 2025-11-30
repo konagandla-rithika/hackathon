@@ -9,7 +9,7 @@
     body {
         margin: 0;
         font-family: Arial, sans-serif;
-        background-image: url(https://www.shutterstock.com/image-photo/colour-old-concrete-wall-texture-600nw-2600440143.jpg);
+        background-image: url(https://img.freepik.com/premium-photo/farmer-customer-shaking-hands-farm-setting_818261-79807.jpg);
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
@@ -19,8 +19,8 @@
         position: fixed;
         top: 0;
         width: 95%;
-        height: 95px;                             
-      background: rgba(68, 38, 32, 0.95);
+        height: 95px;
+        background: rgba(68, 38, 32, 0.95);
         padding: 0 40px;
         display: flex;
         justify-content: space-between;
@@ -32,25 +32,25 @@
     nav h1 {
         margin: 0;
         color: white;
-        font-size: 32px;                         
+        font-size: 32px;
         font-weight: bold;
     }
 
     nav div {
         display: flex;
         align-items: center;
-        gap: 28px;                                
+        gap: 28px;
     }
 
     nav a {
         color: white;
-        font-size: 20px;                           
+        font-size: 20px;
         text-decoration: none;
         cursor: pointer;
         transition: 0.3s ease;
         display: flex;
         align-items: center;
-        gap: 8px;                                 
+        gap: 10px;
     }
 
     nav a:hover {
@@ -58,7 +58,7 @@
     }
 
     nav i {
-        font-size: 22px;                           /* Larger icons */
+        font-size: 22px;
     }
 
     .section {
@@ -76,12 +76,7 @@
         box-shadow: 0 0 10px rgba(0,0,0,0.2);
         max-width: 400px;
         width: 100%;
-        margin-top: 120px;                         /* More space due to bigger navbar */
-    }
-
-    .card h2 {
-        margin-top: 0;
-        margin-bottom: 15px;
+        margin-top: 120px;
     }
 
     .card input {
@@ -99,20 +94,19 @@
         margin-top: 10px;
         border: none;
         border-radius: 5px;
-       background-color: rgba(47, 4, 4, 0.71);
+        background-color: rgba(47, 4, 4, 0.71);
         color: white;
         font-size: 16px;
         cursor: pointer;
     }
-
-    .card button:hover {
-        background-color: rgba(47, 4, 4, 0.71);
+    .card h2{
+        font-family: cursive;
+        color:rgba(47, 4, 4, 0.71) ;
     }
     </style>
 </head>
 
 <body>
-
 
 <nav>
     <h1>PRP Village Foods</h1>
@@ -120,23 +114,57 @@
     <div>
         <a href="home.html"><i class="fa-solid fa-house"></i> Home</a>
         <a href="product.html"><i class="fa-solid fa-circle-info"></i> Product</a>
-        <a href="contact.html"><i class="fa-solid fa-phone"></i> Contact</a>
-        <a href="farmer_login.html"><i class="fa-solid fa-user"></i> Farmer Login</a>
+        <a href="contact.html"><i class="fa-solid fa-phone"></i> Feedback</a>
         <a href="home.html#shop"><i class="fa-solid fa-cart-shopping"></i> Shop</a>
     </div>
 </nav>
 
 <section class="section">
     <div class="card">
-        <h2>Farmer Login</h2>
+        <h2>User Login</h2>
 
-        <form action="farmer_profile.html" method="get">
-            <input type="text" name="farmerId" placeholder="Farmer ID or Email" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">Login</button>
-        </form>
+        <form id="loginForm">
+    <input type="text" id="farmerId" placeholder="Farmer ID or Email" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button type="submit">Login</button>
+    <p id="message" style="color:red; font-weight:bold;"></p>
+</form>
+
     </div>
 </section>
+<script>
+document.getElementById("loginForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const farmerId = document.getElementById("farmerId").value;
+    const password = document.getElementById("password").value;
+    const message = document.getElementById("message");
+
+    fetch("http://localhost:5000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: farmerId, password: password })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            message.style.color = "green";
+            message.innerText = "Login Successful!";
+
+            setTimeout(() => {
+                window.location.href = "home.html";
+            }, 800);
+        } else {
+            message.style.color = "red";
+            message.innerText = data.message;
+        }
+    })
+    .catch(() => {
+        message.style.color = "red";
+        message.innerText = "Server error. Try again!";
+    });
+});
+</script>
 
 </body>
 </html>
